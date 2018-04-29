@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ZSRFModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="clientID" />
+          </Key>
+          <Property Name="clientID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CLastName" Type="varchar" MaxLength="15" />
+          <Property Name="CFirstName" Type="varchar" MaxLength="15" />
+          <Property Name="CAddress" Type="varchar" MaxLength="25" />
+          <Property Name="CCity" Type="varchar" MaxLength="15" />
+          <Property Name="CState" Type="char" MaxLength="2" />
+          <Property Name="CZip" Type="char" MaxLength="5" />
+          <Property Name="CCountry" Type="varchar" MaxLength="15" />
+          <Property Name="CPhone" Type="varchar" MaxLength="15" />
+          <Property Name="CAge" Type="char" MaxLength="3" />
+          <Property Name="CDOB" Type="date" />
+          <Property Name="CEmail" Type="varchar" MaxLength="35" />
+          <Property Name="CCellPhone" Type="varchar" MaxLength="15" />
+          <Property Name="CDiagnosis" Type="varchar" MaxLength="25" />
+          <Property Name="CReferLast" Type="varchar" MaxLength="15" />
+          <Property Name="CReferFirst" Type="varchar" MaxLength="15" />
+          <Property Name="CReferRelation" Type="varchar" MaxLength="15" />
+          <Property Name="CReferAddress" Type="varchar" MaxLength="25" />
+          <Property Name="CReferCity" Type="varchar" MaxLength="15" />
+          <Property Name="CReferState" Type="char" MaxLength="2" />
+          <Property Name="CReferZip" Type="varchar" MaxLength="5" />
+          <Property Name="CReferPhone" Type="varchar" MaxLength="15" />
+          <Property Name="CRefCell" Type="varchar" MaxLength="15" />
+          <Property Name="CDoctorName" Type="varchar" MaxLength="25" />
+          <Property Name="CDoctorAddress" Type="varchar" MaxLength="40" />
+          <Property Name="CDoctorPhone" Type="varchar" MaxLength="15" />
+          <Property Name="CHospital" Type="varchar" MaxLength="15" />
+          <Property Name="CMemo" Type="varchar" MaxLength="50" />
+          <Property Name="LastModified" Type="date" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="serviceID" />
+          </Key>
+          <Property Name="serviceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="clientID" Type="int" />
+          <Property Name="serviceType" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="serviceDate" Type="date" Nullable="false" />
+          <Property Name="serviceCheckNum" Type="int" />
+          <Property Name="serviceAmnt" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="memo" Type="varchar" MaxLength="50" />
+          <Property Name="notes" Type="varchar" MaxLength="50" />
+          <Property Name="lastModified" Type="date" />
+        </EntityType>
+        <Association Name="fk_clientID">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="Service" Type="Self.Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="clientID" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="clientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ZSRFModelStoreContainer">
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_clientID" Association="Self.fk_clientID">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Service" EntitySet="Service" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ZSRFModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="clientID" />
+          </Key>
+          <Property Name="clientID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CLastName" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="CFirstName" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="CAddress" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CCity" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="CState" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="CZip" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="CCountry" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="CPhone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="CAge" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="CDOB" Type="DateTime" Precision="0" />
+          <Property Name="CEmail" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="CCellPhone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="CDiagnosis" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CReferLast" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="CReferFirst" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="CReferRelation" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="CReferAddress" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CReferCity" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="CReferState" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="CReferZip" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="CReferPhone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="CRefCell" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="CDoctorName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CDoctorAddress" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="CDoctorPhone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="CHospital" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="CMemo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastModified" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Services" Relationship="Self.fk_clientID" FromRole="Client" ToRole="Service" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="serviceID" />
+          </Key>
+          <Property Name="serviceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="clientID" Type="Int32" />
+          <Property Name="serviceType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="serviceDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="serviceCheckNum" Type="Int32" />
+          <Property Name="serviceAmnt" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="memo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="notes" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="lastModified" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Client" Relationship="Self.fk_clientID" FromRole="Service" ToRole="Client" />
+        </EntityType>
+        <Association Name="fk_clientID">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="Service" Type="Self.Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="clientID" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="clientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ZSRFEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Clients" EntityType="Self.Client" />
+          <EntitySet Name="Services" EntityType="Self.Service" />
+          <AssociationSet Name="fk_clientID" Association="Self.fk_clientID">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Service" EntitySet="Services" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ZSRFModelStoreContainer" CdmEntityContainer="ZSRFEntities">
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="ZSRFModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="clientID" ColumnName="clientID" />
+                <ScalarProperty Name="CLastName" ColumnName="CLastName" />
+                <ScalarProperty Name="CFirstName" ColumnName="CFirstName" />
+                <ScalarProperty Name="CAddress" ColumnName="CAddress" />
+                <ScalarProperty Name="CCity" ColumnName="CCity" />
+                <ScalarProperty Name="CState" ColumnName="CState" />
+                <ScalarProperty Name="CZip" ColumnName="CZip" />
+                <ScalarProperty Name="CCountry" ColumnName="CCountry" />
+                <ScalarProperty Name="CPhone" ColumnName="CPhone" />
+                <ScalarProperty Name="CAge" ColumnName="CAge" />
+                <ScalarProperty Name="CDOB" ColumnName="CDOB" />
+                <ScalarProperty Name="CEmail" ColumnName="CEmail" />
+                <ScalarProperty Name="CCellPhone" ColumnName="CCellPhone" />
+                <ScalarProperty Name="CDiagnosis" ColumnName="CDiagnosis" />
+                <ScalarProperty Name="CReferLast" ColumnName="CReferLast" />
+                <ScalarProperty Name="CReferFirst" ColumnName="CReferFirst" />
+                <ScalarProperty Name="CReferRelation" ColumnName="CReferRelation" />
+                <ScalarProperty Name="CReferAddress" ColumnName="CReferAddress" />
+                <ScalarProperty Name="CReferCity" ColumnName="CReferCity" />
+                <ScalarProperty Name="CReferState" ColumnName="CReferState" />
+                <ScalarProperty Name="CReferZip" ColumnName="CReferZip" />
+                <ScalarProperty Name="CReferPhone" ColumnName="CReferPhone" />
+                <ScalarProperty Name="CRefCell" ColumnName="CRefCell" />
+                <ScalarProperty Name="CDoctorName" ColumnName="CDoctorName" />
+                <ScalarProperty Name="CDoctorAddress" ColumnName="CDoctorAddress" />
+                <ScalarProperty Name="CDoctorPhone" ColumnName="CDoctorPhone" />
+                <ScalarProperty Name="CHospital" ColumnName="CHospital" />
+                <ScalarProperty Name="CMemo" ColumnName="CMemo" />
+                <ScalarProperty Name="LastModified" ColumnName="LastModified" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Services">
+            <EntityTypeMapping TypeName="ZSRFModel.Service">
+              <MappingFragment StoreEntitySet="Service">
+                <ScalarProperty Name="serviceID" ColumnName="serviceID" />
+                <ScalarProperty Name="clientID" ColumnName="clientID" />
+                <ScalarProperty Name="serviceType" ColumnName="serviceType" />
+                <ScalarProperty Name="serviceDate" ColumnName="serviceDate" />
+                <ScalarProperty Name="serviceCheckNum" ColumnName="serviceCheckNum" />
+                <ScalarProperty Name="serviceAmnt" ColumnName="serviceAmnt" />
+                <ScalarProperty Name="memo" ColumnName="memo" />
+                <ScalarProperty Name="notes" ColumnName="notes" />
+                <ScalarProperty Name="lastModified" ColumnName="lastModified" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,43 @@
+﻿<Controls:MetroWindow x:Class="ZSRF.View.ServicesWindow"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:local="clr-namespace:ZSRF.View"
+                      xmlns:vm="clr-namespace:ZSRF.ViewModel"
+                      mc:Ignorable="d"
+                      Title="Services" Height="300" Width="300">
+    <Controls:MetroWindow.DataContext>
+        <vm:ServicesVM/>
+    </Controls:MetroWindow.DataContext>
+    <Grid>
+        <DataGrid
+            x:Name="ServicesGrid"
+            ItemsSource="{Binding Services, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            SelectedItem="{Binding SelectedService}"
+            CanUserAddRows="True"
+            AutoGenerateColumns="False"
+            IsReadOnly="False">
+            <DataGrid.Columns>
+                <!--the field name in binding needs to match the field name in the database. the header doesn't matter-->
+                <DataGridTextColumn Header="Client ID" Binding="{Binding clientID}"/>
+                <DataGridTextColumn Header="Last Name" Binding="{Binding lastName}"/>
+                <DataGridTextColumn Header="DOB" Binding="{Binding CDOB}"/>
+                <DataGridTextColumn Header="ServiceID" Binding="{Binding ServiceID}"/>
+                <DataGridTextColumn Header="Client ID" Binding="{Binding ClientID}"/>
+                <DataGridTextColumn Header="ServiceType" Binding="{Binding ServiceType}"/>
+
+
+                <!--make this a date instead of text column-->
+                <DataGridTextColumn Header="Date" Binding="{Binding serviceDate}"/>
+
+                <DataGridTextColumn Header="Check Number" Binding="{Binding serviceCheckNum}"/>
+                <DataGridTextColumn Header="Amount" Binding="{Binding serviceAmnt}"/>
+                <DataGridTextColumn Header="Memo" Binding="{Binding memo}"/>
+                <DataGridTextColumn Header="Notes" Binding="{Binding notes}"/>
+                <DataGridTextColumn Header="Last Modified" Binding="{Binding lastModified}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Controls:MetroWindow>
