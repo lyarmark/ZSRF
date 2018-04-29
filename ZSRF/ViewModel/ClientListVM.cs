@@ -9,7 +9,7 @@ using ZSRF.View;
 
 namespace ZSRF.ViewModel
 {
-    class ClientVM : BaseVM
+    class ClientListVM : BaseVM
     {
         #region data
         private Model.Model model;
@@ -19,17 +19,6 @@ namespace ZSRF.ViewModel
             get { return model.Clients; }
             set { model.Clients = value; }
         }
-
-        //private Client _selectedClient;
-        //public Client SelectedClient
-        //{
-        //    get { return _selectedClient; }
-        //    set
-        //    {
-        //        _selectedClient = value;
-        //        ClientSelected(value);
-        //    }
-        //}
 
         private CommandWithParam _servicesCmd;
         private CommandWithParam _clientInfoCmd;
@@ -44,7 +33,7 @@ namespace ZSRF.ViewModel
         #endregion data
 
         #region construct
-        public ClientVM()
+        public ClientListVM()
         {
             this.model = new Model.Model();
 
@@ -119,11 +108,15 @@ namespace ZSRF.ViewModel
 
         private void openClientInfo(Client c)
         {
-
+            if (c == null) return;
+            ClientInfoVM vm = new ClientInfoVM(c);
+            ClientInfo clientWindow = new ClientInfo(vm);
+            clientWindow.Show();
         }
 
         private void openServices(Client c)
         {
+            if (c == null) return;
             ServicesVM vm = new ServicesVM(c);
             ServicesWindow servicesWindow = new ServicesWindow(vm);
             servicesWindow.Show();

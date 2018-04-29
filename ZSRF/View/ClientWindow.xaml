@@ -1,0 +1,47 @@
+﻿<Controls:MetroWindow x:Class="ZSRF.View.ClientWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:local="clr-namespace:ZSRF.View"
+             xmlns:vm="clr-namespace:ZSRF.ViewModel"
+             Height="350" Width="525">
+    <Controls:MetroWindow.DataContext>
+        <vm:ClientListVM/>
+    </Controls:MetroWindow.DataContext>
+
+    <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
+        <Grid>
+            <DataGrid
+                    x:Name="ClientGrid"
+                    ItemsSource="{Binding Clients, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    CanUserAddRows="True"
+                    AutoGenerateColumns="False"
+                    IsReadOnly="False">
+                <DataGrid.Columns>
+                    <!--the field name in binding needs to match the field name in the database. the header doesn't matter-->
+                    <DataGridTextColumn Header="Client ID" Binding="{Binding ClientID}"/>
+                    <DataGridTextColumn Header="Last Name" Binding="{Binding CLastName}"/>
+                    <DataGridTextColumn Header="First Name" Binding="{Binding CFirstName}"/>
+                    <DataGridTextColumn Header="DOB" Binding="{Binding CDOB}"/>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Command="{Binding RelativeSource={RelativeSource AncestorLevel=1, AncestorType=Controls:MetroWindow, Mode=FindAncestor}, Path=DataContext.ClientInfoCommand}" CommandParameter="{Binding}">Client Info</Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Command="{Binding RelativeSource={RelativeSource AncestorLevel=1, AncestorType=Controls:MetroWindow, Mode=FindAncestor}, Path=DataContext.ServicesCommand}" CommandParameter="{Binding}">Services</Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </ScrollViewer>
+</Controls:MetroWindow>
