@@ -1,4 +1,4 @@
-﻿<Controls:MetroWindow x:Class="ZSRF.View.ClientWindow"
+﻿<Controls:MetroWindow x:Class="ZSRF.View.ClientsWindow"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,7 +6,7 @@
              xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:local="clr-namespace:ZSRF.View"
              xmlns:vm="clr-namespace:ZSRF.ViewModel"
-             Height="350" Width="525">
+             WindowState="Maximized">
     <Controls:MetroWindow.DataContext>
         <vm:ClientListVM/>
     </Controls:MetroWindow.DataContext>
@@ -20,11 +20,19 @@
                     AutoGenerateColumns="False"
                     IsReadOnly="False">
                 <DataGrid.Columns>
-                    <!--the field name in binding needs to match the field name in the database. the header doesn't matter-->
-                    <DataGridTextColumn Header="Client ID" Binding="{Binding ClientID}"/>
+                    <!--the field name in binding needs to match the field name in the database. it is case sensitive
+                    the header doesn't need to match anything-->
+                    <DataGridTextColumn Header="Client ID" Binding="{Binding clientID}"/>
                     <DataGridTextColumn Header="Last Name" Binding="{Binding CLastName}"/>
                     <DataGridTextColumn Header="First Name" Binding="{Binding CFirstName}"/>
-                    <DataGridTextColumn Header="DOB" Binding="{Binding CDOB}"/>
+                    <DataGridTemplateColumn Header="DOB">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <DatePicker SelectedDate="{Binding CDOB}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>

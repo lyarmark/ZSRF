@@ -9,9 +9,12 @@ namespace ZSRF.ViewModel
     public class ClientInfoVM : BaseVM
     {
         Client client;
+        public string WindowTitle { get; set; }
+
         public ClientInfoVM(Client c)
         {
             client = c;
+            WindowTitle = c.CLastName + ", " + c.CFirstName;
         }
         public ClientInfoVM() { }
     }

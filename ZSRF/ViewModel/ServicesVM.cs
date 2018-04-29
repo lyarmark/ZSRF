@@ -9,7 +9,7 @@ namespace ZSRF.ViewModel
 {
     public class ServicesVM : BaseVM
     {
-
+        public string WindowTitle { get; set; }
         private ObservableCollection<Service> _services;
         public ObservableCollection<Service> Services
         {
@@ -20,6 +20,7 @@ namespace ZSRF.ViewModel
         public ServicesVM(Client client)
         {
             Services = new ObservableCollection<Service>(client.Services);
+            WindowTitle = client.CLastName + ", " + client.CFirstName;
         }
         public ServicesVM() { }
     }

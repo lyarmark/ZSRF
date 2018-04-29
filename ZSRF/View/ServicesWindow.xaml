@@ -7,7 +7,7 @@
                       xmlns:local="clr-namespace:ZSRF.View"
                       xmlns:vm="clr-namespace:ZSRF.ViewModel"
                       mc:Ignorable="d"
-                      Title="Services" Height="300" Width="300">
+                      Title="{Binding WindowTitle}" Height="300" Width="700">
     <Controls:MetroWindow.DataContext>
         <vm:ServicesVM/>
     </Controls:MetroWindow.DataContext>
@@ -15,28 +15,26 @@
         <DataGrid
             x:Name="ServicesGrid"
             ItemsSource="{Binding Services, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            SelectedItem="{Binding SelectedService}"
             CanUserAddRows="True"
             AutoGenerateColumns="False"
             IsReadOnly="False">
             <DataGrid.Columns>
                 <!--the field name in binding needs to match the field name in the database. the header doesn't matter-->
-                <DataGridTextColumn Header="Client ID" Binding="{Binding clientID}"/>
-                <DataGridTextColumn Header="Last Name" Binding="{Binding lastName}"/>
-                <DataGridTextColumn Header="DOB" Binding="{Binding CDOB}"/>
-                <DataGridTextColumn Header="ServiceID" Binding="{Binding ServiceID}"/>
-                <DataGridTextColumn Header="Client ID" Binding="{Binding ClientID}"/>
-                <DataGridTextColumn Header="ServiceType" Binding="{Binding ServiceType}"/>
+                <DataGridTextColumn Header="Service Type" Binding="{Binding serviceType}"/>
 
-
-                <!--make this a date instead of text column-->
-                <DataGridTextColumn Header="Date" Binding="{Binding serviceDate}"/>
+                <DataGridTemplateColumn Header="Service Date">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding serviceDate}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
 
                 <DataGridTextColumn Header="Check Number" Binding="{Binding serviceCheckNum}"/>
-                <DataGridTextColumn Header="Amount" Binding="{Binding serviceAmnt}"/>
+                <DataGridTextColumn Header="Amount" Binding="{Binding serviceAmnt, StringFormat='$00.00'}"/>
                 <DataGridTextColumn Header="Memo" Binding="{Binding memo}"/>
                 <DataGridTextColumn Header="Notes" Binding="{Binding notes}"/>
-                <DataGridTextColumn Header="Last Modified" Binding="{Binding lastModified}"/>
+                <DataGridTextColumn Header="Last Modified" Binding="{Binding lastModified, StringFormat='{}{0:MM/dd/yyyy}'}" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

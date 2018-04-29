@@ -3,11 +3,11 @@
 namespace ZSRF.View
 {
     /// <summary>
-    /// Interaction logic for ClientWindow.xaml
+    /// Interaction logic for ClientsWindow.xaml
     /// </summary>
-    public partial class ClientWindow : MetroWindow
+    public partial class ClientsWindow : MetroWindow
     {
-        public ClientWindow()
+        public ClientsWindow()
         {
             InitializeComponent();
         }
